@@ -1,0 +1,155 @@
+// JavaScript Document
+
+// Events Generated Are summarized below
+// console.log('Show More button activated');
+// console.log('Menu Activated');
+// console.log('Menu Deactivated')
+// console.log("Uploader Page Visited");	
+// console.log("Submit Button Clicked");
+
+jQuery( document ).ready(function() {
+	// Event if the 'Show More' Button has been clicked
+	jQuery('.show-more > a').click(function(){
+		console.log('Show More button activated');
+	});
+	
+	// Event if the Menu has been opened or closed
+	jQuery('.navbar-toggle').click(function() {
+		var aria_expanded = $(this).attr('aria-expanded');
+
+		if(aria_expanded == 'false' || aria_expanded== null){
+			console.log('Menu Activated');
+			gtag('event', 'menu_activated', {
+			  	'event_category': 'Menu',
+  				'event_label': 'Menu - Activated'
+			});
+		}
+		else {
+			console.log('Menu Deactivated');
+			gtag('event', 'menu_activated', {
+			  	'event_category': 'Menu',
+  				'event_label': 'Menu - Deactivated'
+			});
+		}
+	});
+	
+	// Uploader Specific events
+	var loc = window.location.pathname;
+	var dir = loc.substring(0, loc.lastIndexOf('/'));
+	if(dir == '/uploader'){
+		// Uploader Context
+		console.log("Uploader Page Visited");	
+		gtag('event', 'page_visited', {
+			'event_category': 'Page',
+			'event_label': 'Page - Uploader Page Visited'
+		});
+		
+		jQuery('#upload-form #submit-button').click(function() {
+			console.log("Submit Button Clicked");
+			
+			jQuery('#upload-form .form-group.required, upload-form .form-group.has-error').each(function(index,element){
+				// This must be the file upload field
+				if( jQuery(this).hasClass('field-uploaderform-imagefile')){
+					error = jQuery(this).find('.help-block-error').text();
+					
+					
+					console.log(error);
+					
+				}
+				 // This must be the First Name
+				 if(jQuery(this).hasClass('has-error')){
+					if( jQuery(this).hasClass('field-uploaderform-fname')){
+						error = "Please enter a first name";
+						console.log(error);
+					}
+				 // Last Name
+					if( jQuery(this).hasClass('field-uploaderform-lname')){
+						error = "Please enter a last name";
+						console.log(error);
+					}
+					// Email
+					if( jQuery(this).hasClass('field-uploaderform-photographersemail')){
+						error = "Please enter an email";
+						console.log(error);
+					}
+					// Photo Title
+					if( jQuery(this).hasClass('field-uploaderform-photographersemail')){
+						error = "Please enter a photo title";
+						console.log(error);
+					}
+					// Caption
+					if( jQuery(this).hasClass('field-uploaderform-captionfrommeta')){
+						error = "Please enter a caption";  
+						console.log(error);
+					}
+					// Year
+					if( jQuery(this).hasClass('field-uploaderform-year')){
+						error = "Please enter a year";
+						console.log(error);
+					}
+					// Terms of Service
+					if( jQuery(this).hasClass('field-uploaderform-acceptcheckbox') ){
+						error = "Please check the terms of service";
+						console.log(error);
+					}
+				 }
+			});
+				
+		});
+		jQuery('#upload-form').submit(function() {
+			
+			console.log("Upload Form Submitted");	
+		});	
+		
+		// User has right clicked while over an image
+		jQuery(document).mousedown(function(e){ 
+			if( e.button == 2 && jQuery(e.target).is(".asset-page .asset-thumbnail.full-width img")) { 
+				// alert('Right mouse button!'); 
+				console.log('Right click over image');
+				gtag('event', 'image_rightclicked', {
+					'event_category'	: 'Image Detail',
+					'event_label'		: 'Image Detail - Right Click'
+				});
+			} 
+		});	
+	}
+	
+	var itemViewed = false;
+	jQuery(window).scroll(function() {
+		
+		var selector = ".asset-details .flex-item:first-child";
+		if(itemViewed == false) {
+			if(inView(selector)){
+				itemViewed = true;
+				console.log("Credits Viewed");
+				gtag('event', 'credits_viewed', {
+					'event_category'	: 'Credits',
+					'event_label'		: 'Credits - Viewed'
+				});
+			}
+		}
+		
+			
+	});	
+	
+});
+function inView(selector) {
+	var top_of_element 		= jQuery(selector).offset().top;
+	var bottom_of_element 	= jQuery(selector).offset().top + jQuery(selector).outerHeight();
+	var bottom_of_screen 	= jQuery(window).scrollTop() + jQuery(window).height();
+	var top_of_screen 		= jQuery(window).scrollTop();
+	
+	if((bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)){
+		return true;
+	}
+	else {
+	   return false;
+	}
+}
+jQuery('body').on('DOMNodeInserted', '#searchResultsContainer', function(e) {
+	console.log("Show More Pagination Inserted");
+	gtag('event', 'showmore_pagination_added', {
+		'event_category'	: 'Show More',
+		'event_label'		: 'Show More - Pagination Added'
+	});
+});
