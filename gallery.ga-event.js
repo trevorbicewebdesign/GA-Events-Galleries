@@ -2,10 +2,16 @@
 
 // Events Generated Are summarized below
 // console.log('Show More button activated');
+// console.log("Show More Pagination Inserted");
+
 // console.log('Menu Activated');
-// console.log('Menu Deactivated')
-// console.log("Uploader Page Visited");	
+// console.log('Menu Deactivated');
+
+// console.log("Uploader Page Visited");
 // console.log("Submit Button Clicked");
+// console.log("Upload Form Submitted");	
+
+// console.log("Credits Viewed");
 
 jQuery( document ).ready(function() {
 	// Event if the 'Show More' Button has been clicked
@@ -46,73 +52,92 @@ jQuery( document ).ready(function() {
 		
 		jQuery('#upload-form #submit-button').click(function() {
 			console.log("Submit Button Clicked");
+			gtag('event', 'upload_form_submit_clicked', {
+				'event_category': 'Uploader Form',
+				'event_label': 'Uploader Form - Submit Clicked'
+			});
 			
-			jQuery('#upload-form .form-group.required, upload-form .form-group.has-error').each(function(index,element){
-				// This must be the file upload field
-				if( jQuery(this).hasClass('field-uploaderform-imagefile')){
-					error = jQuery(this).find('.help-block-error').text();
-					
-					
-					console.log(error);
-					
-				}
-				 // This must be the First Name
-				 if(jQuery(this).hasClass('has-error')){
-					if( jQuery(this).hasClass('field-uploaderform-fname')){
+			jQuery('#upload-form .form-group.required, #upload-form .form-group.has-error').each(function(index,element){
+					// This must be the file upload field
+					if( jQuery(this).hasClass('field-uploaderform-imagefile') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
+						error = jQuery(this).find('.help-block-error').text();
+						
+						
+						console.log(error);
+						gtag('event', 'uploader_form_error_file', {
+							'event_category': 'Uploader Form',
+							'event_label': 'Uploader Form - File - '+error
+						});
+						
+					}
+					// This must be the First Name
+					else if( jQuery(this).hasClass('field-uploaderform-fname') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a first name";
 						console.log(error);
 					}
 				 // Last Name
-					if( jQuery(this).hasClass('field-uploaderform-lname')){
+					else if( jQuery(this).hasClass('field-uploaderform-lname') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a last name";
 						console.log(error);
 					}
 					// Email
-					if( jQuery(this).hasClass('field-uploaderform-photographersemail')){
+					else if( jQuery(this).hasClass('field-uploaderform-photographersemail') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter an email";
 						console.log(error);
 					}
 					// Photo Title
-					if( jQuery(this).hasClass('field-uploaderform-photographersemail')){
+					else if( jQuery(this).hasClass('field-uploaderform-photographersemail') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a photo title";
 						console.log(error);
 					}
 					// Caption
-					if( jQuery(this).hasClass('field-uploaderform-captionfrommeta')){
+					else if( jQuery(this).hasClass('field-uploaderform-captionfrommeta') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a caption";  
 						console.log(error);
 					}
 					// Year
-					if( jQuery(this).hasClass('field-uploaderform-year')){
+					else if( jQuery(this).hasClass('field-uploaderform-year') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('select').val() == '') ){
 						error = "Please enter a year";
 						console.log(error);
 					}
 					// Terms of Service
-					if( jQuery(this).hasClass('field-uploaderform-acceptcheckbox') ){
+					else if( jQuery(this).hasClass('field-uploaderform-acceptcheckbox') && ( jQuery(this).hasClass('has-error') || !jQuery(this).find('input').attr("checked") ) ){
 						error = "Please check the terms of service";
 						console.log(error);
 					}
-				 }
+				 
 			});
 				
 		});
+		/*
+		jQuery('mydiv').bind("DOMSubtreeModified",function(){
+			alert('changed');
+		});
+		*/
+		
 		jQuery('#upload-form').submit(function() {
 			
 			console.log("Upload Form Submitted");	
+			gtag('event', 'upload_form_submitted', {
+				'event_category': 'Uploads',
+				'event_label': 'Uploader - Form Submitted'
+			});
 		});	
 		
-		// User has right clicked while over an image
-		jQuery(document).mousedown(function(e){ 
-			if( e.button == 2 && jQuery(e.target).is(".asset-page .asset-thumbnail.full-width img")) { 
-				// alert('Right mouse button!'); 
-				console.log('Right click over image');
-				gtag('event', 'image_rightclicked', {
-					'event_category'	: 'Image Detail',
-					'event_label'		: 'Image Detail - Right Click'
-				});
-			} 
-		});	
+		
 	}
+	
+	// User has right clicked while over an image
+	jQuery(document).mousedown(function(e){ 
+		if( e.button == 2 && jQuery(e.target).is(".asset-page .asset-thumbnail.full-width img")) { 
+			// alert('Right mouse button!'); 
+			console.log('Right click over image');
+			gtag('event', 'image_rightclicked', {
+				'event_category'	: 'Image Detail',
+				'event_label'		: 'Image Detail - Right Click'
+			});
+		} 
+	});	
 	
 	var itemViewed = false;
 	jQuery(window).scroll(function() {
