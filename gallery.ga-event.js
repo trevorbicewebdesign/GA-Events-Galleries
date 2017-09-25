@@ -169,7 +169,7 @@ jQuery( document ).ready(function() {
 		
 		
 		jQuery(".upload_message").change(function() {
-			if(jQuery(this).html()=='File sample-image.jpg has been successfully uploaded.') {
+			if(jQuery(this).html().search( 'has been successfully uploaded.') {
 				
 				console.log("File Uploaded Successfully");
 				gtag('event', 'uploader_form_error_file', {
@@ -178,7 +178,7 @@ jQuery( document ).ready(function() {
 				});
 			}
 		});
-		if(jQuery(".upload_message").html()=='File sample-image.jpg has been successfully uploaded.') {
+		if(jQuery(".upload_message").html().search( 'has been successfully uploaded.') {
 			console.log("File Uploaded Successfully");
 			gtag('event', 'uploader_form_error_file', {
 				'event_category': 'Uploader Form',
@@ -221,7 +221,8 @@ jQuery( document ).ready(function() {
 	jQuery(window).scroll(function() {
 		
 		var selector = ".asset-details .flex-item:first-child";
-		if(itemViewed == false) {
+		
+		if(itemViewed == false && jQuery(selector).length >0) {
 			if(inView(selector)){
 				itemViewed = true;
 				console.log("Credits Viewed");
