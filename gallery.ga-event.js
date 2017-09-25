@@ -169,7 +169,7 @@ jQuery( document ).ready(function() {
 		
 		
 		jQuery(".upload_message").change(function() {
-			if(jQuery(this).html().search( 'has been successfully uploaded.') {
+			if(jQuery(this).html().search( 'has been successfully uploaded.')) {
 				
 				console.log("File Uploaded Successfully");
 				gtag('event', 'uploader_form_error_file', {
@@ -178,7 +178,7 @@ jQuery( document ).ready(function() {
 				});
 			}
 		});
-		if(jQuery(".upload_message").html().search( 'has been successfully uploaded.') {
+		if(jQuery(".upload_message").html().search( 'has been successfully uploaded.')) {
 			console.log("File Uploaded Successfully");
 			gtag('event', 'uploader_form_error_file', {
 				'event_category': 'Uploader Form',
