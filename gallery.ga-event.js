@@ -7,7 +7,17 @@
 // console.log("Uploader Page Visited");	
 // console.log("Submit Button Clicked");
 
+function triggerGA_event(eventArray) {
+	console.log(eventArray['label']);
+	ga('send', {
+		hitType: 			eventArray['type'],
+		eventCategory: 	eventArray['category'],
+		eventAction: 		eventArray['action'],
+		eventLabel:		eventArray['label']
+	});
+}
 jQuery( document ).ready(function() {
+	
 	// Event if the 'Show More' Button has been clicked
 	jQuery('.show-more > a').click(function(){
 		console.log('Show More button activated');
@@ -16,20 +26,23 @@ jQuery( document ).ready(function() {
 	// Event if the Menu has been opened or closed
 	jQuery('.navbar-toggle').click(function() {
 		var aria_expanded = $(this).attr('aria-expanded');
-
+		
+		var eventArray = new Array();
+		eventArray['type'] 		= 'event';
+		eventArray['category'] 	= 'Menu';
+		
+		
 		if(aria_expanded == 'false' || aria_expanded== null){
 			console.log('Menu Activated');
-			gtag('event', 'menu_activated', {
-			  	'event_category': 'Menu',
-  				'event_label': 'Menu - Activated'
-			});
+			eventArray['action'] 	= 'Opened';
+			eventArray['label'] 	= 'Menu - Opened';
+			triggerGA_event(eventArray);
+			
 		}
 		else {
-			console.log('Menu Deactivated');
-			gtag('event', 'menu_activated', {
-			  	'event_category': 'Menu',
-  				'event_label': 'Menu - Deactivated'
-			});
+			eventArray['action'] 	= 'Opened';
+			eventArray['label'] 	= 'Menu - Opened';
+			triggerGA_event(eventArray);
 		}
 	});
 	
@@ -38,156 +51,147 @@ jQuery( document ).ready(function() {
 	var dir = loc.substring(0, loc.lastIndexOf('/'));
 	if(dir == '/uploader'){
 		// Uploader Context
-		/*
-		console.log("Uploader Page Visited");	
-		gtag('event', 'page_visited', {
-			'event_category': 'Page',
-			'event_label': 'Page - Uploader Page Visited'
-		});
-		*/
+		
 		
 		jQuery('#upload-form #submit-button').click(function() {
-			console.log("Submit Button Clicked");
-			gtag('event', 'upload_form_submit_clicked', {
-				'event_category': 'Uploader Form',
-				'event_label': 'Uploader Form - Submit Clicked'
-			});
+			
+			var eventArray = new Array();
+			eventArray['type'] 		= 'event';
+			eventArray['category'] 	= 'Upload Form';
+			eventArray['action'] 	= 'Submit Button Clicked';
+			eventArray['label'] 	= 'Upload Form - Submit Button Clicked';
+			
+			triggerGA_event(eventArray);
 			
 			jQuery('#upload-form .form-group.required, #upload-form .form-group.has-error').each(function(index,element){
 					// This must be the file upload field
+					
+					eventArray['action'] 	= 'Error';
 
 					if( jQuery(this).hasClass('field-uploaderform-imagefile') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = jQuery(this).find('.help-block-error').text();
-						
-						
-						console.log(error);
-						gtag('event', 'uploader_form_error_file', {
-							'event_category': 'Uploader Form',
-							'event_label': 'Uploader Form - File - '+error
-						});
-						
+						eventArray['label'] 	= 'Upload Form - Error - ' + error;
+						triggerGA_event(eventArray);
 					}
 					// This must be the First Name
 					else if( jQuery(this).hasClass('field-uploaderform-fname') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a first name";
-						console.log(error);
 						if(jQuery(this).find('input').val() == ''){
 							jQuery(this).addClass('has-error');
 							jQuery(this).find('.help-block-error').html("Required field.");
 						
 						}
-						gtag('event', 'uploader_form_error_file', {
-							'event_category': 'Uploader Form',
-							'event_label': 'Uploader Form - File - '+error
-						});
+						eventArray['label'] 	= 'Upload Form - Error - ' + error;
+						triggerGA_event(eventArray);
 						
 					}
 				 // Last Name
 					else if( jQuery(this).hasClass('field-uploaderform-lname') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a last name";
-						console.log(error);
 						if(jQuery(this).find('input').val() == ''){
 							jQuery(this).addClass('has-error');
 							jQuery(this).find('.help-block-error').html("Required field.");
 						
 						}
-						gtag('event', 'uploader_form_error_file', {
-							'event_category': 'Uploader Form',
-							'event_label': 'Uploader Form - File - '+error
-						});
+						eventArray['label'] 	= 'Upload Form - Error - ' + error;
+						triggerGA_event(eventArray);
 					}
 					// Email
 					else if( jQuery(this).hasClass('field-uploaderform-photographersemail') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter an email";
-						console.log(error);
+						
 						if(jQuery(this).find('input').val() == ''){
 							jQuery(this).addClass('has-error');
 							jQuery(this).find('.help-block-error').html("Required field.");
 						
 						}
-						gtag('event', 'uploader_form_error_file', {
-							'event_category': 'Uploader Form',
-							'event_label': 'Uploader Form - File - '+error
-						});
+						eventArray['label'] 	= 'Upload Form - Error - ' + error;
+						triggerGA_event(eventArray);
 					}
 					// Photo Title
 					else if( jQuery(this).hasClass('field-uploaderform-title') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a photo title";
-						console.log(error);
+						
 						if(jQuery(this).find('input').val() == ''){
 							jQuery(this).addClass('has-error');
 							jQuery(this).find('.help-block-error').html("Required field.");
 						
 						}
-						gtag('event', 'uploader_form_error_file', {
-							'event_category': 'Uploader Form',
-							'event_label': 'Uploader Form - File - '+error
-						});
+						eventArray['label'] 	= 'Upload Form - Error - ' + error;
+						triggerGA_event(eventArray);
 					}
 					// Caption
 					else if( jQuery(this).hasClass('field-uploaderform-captionfrommeta') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a caption";  
-						console.log(error);
+					
 						if(jQuery(this).find('input').val() == ''){
 							jQuery(this).addClass('has-error');
 							jQuery(this).find('.help-block-error').html("Required field.");
 						
 						}
-						gtag('event', 'uploader_form_error_file', {
-							'event_category': 'Uploader Form',
-							'event_label': 'Uploader Form - File - '+error
-						});
+						eventArray['label'] 	= 'Upload Form - Error - ' + error;
+						triggerGA_event(eventArray);
 					}
 					// Year
 					else if( jQuery(this).hasClass('field-uploaderform-year') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('select').val() == '') ){
 						error = "Please enter a year";
-						console.log(error);
+						
 						if(jQuery(this).find('select').val() == ''){
 							jQuery(this).addClass('has-error');
 							jQuery(this).find('.help-block-error').html("Required field.");
 						}
-						gtag('event', 'uploader_form_error_file', {
-							'event_category': 'Uploader Form',
-							'event_label': 'Uploader Form - File - '+error
-						});
+						eventArray['label'] 	= 'Upload Form - Error - ' + error;
+						triggerGA_event(eventArray);
 					}
 					// Terms of Service
 					else if( jQuery(this).hasClass('field-uploaderform-acceptcheckbox') && ( jQuery(this).hasClass('has-error') || !jQuery(this).find('input').attr("checked") ) ){
 						error = "Please check the terms of service";
-						console.log(error);
+						
 						if(!jQuery(this).find('input').attr("checked")){
 							jQuery(this).addClass('has-error');
 							jQuery(this).find('.help-block-error').html("Required field.");
 						}
-						gtag('event', 'uploader_form_error_file', {
-							'event_category': 'Uploader Form',
-							'event_label': 'Uploader Form - File - '+error
-						});
+						eventArray['label'] 	= 'Upload Form - Error - ' + error;
+						triggerGA_event(eventArray);
 					}
 				 
 			});
 				
 		});
 		
-		/*
+		
 		jQuery(".upload_message").change(function() {
-			if(jQuery(this).html().search( 'has been successfully uploaded.')) {
+			if(jQuery(this).html().includes( 'has been successfully uploaded.')) {
 				
-				console.log("File Uploaded Successfully");
-				gtag('event', 'uploader_form_error_file', {
-					'event_category': 'Uploader Form',
-					'event_label': 'Uploader Form - File - '+error
+				var eventArray = new Array();
+				eventArray['type'] 		= 'event';
+				eventArray['category'] 	= 'Upload Form';
+				eventArray['action'] 	= 'Upload Successful';
+				eventArray['label'] 	= 'Upload Form - Upload Successful';
+				triggerGA_event(eventArray);
+				
+				ga('send', {
+					hitType: 'pageview',
+					page: location.pathname + "/upload-success/"
 				});
+
 			}
 		});
-		if(jQuery(".upload_message").html().search( 'has been successfully uploaded.')) {
-			console.log("File Uploaded Successfully");
-			gtag('event', 'uploader_form_error_file', {
-				'event_category': 'Uploader Form',
-				'event_label': 'Uploader Form - File - '+"File Uploaded Successfully"
+		if(jQuery(".upload_message").html().includes( 'has been successfully uploaded.')) {
+			var eventArray = new Array();
+			eventArray['type'] 		= 'event';
+			eventArray['category'] 	= 'Upload Form';
+			eventArray['action'] 	= 'Upload Successful';
+			eventArray['label'] 	= 'Upload Form - Upload Successful';
+			triggerGA_event(eventArray);
+			
+			ga('send', {
+				hitType: 		'pageview',
+				page: 		location.pathname + "/upload-success/",
+				title:		"File Uploaded Successfully"
 			});
 		}
-		*/
+		
 		// 
 		
 		/*
@@ -195,14 +199,19 @@ jQuery( document ).ready(function() {
 			alert('changed');
 		});
 		*/
-		
+
 		jQuery('#upload-form').submit(function() {
 			
-			console.log("Upload Form Submitted");	
-			gtag('event', 'upload_form_submitted', {
-				'event_category': 'Uploads',
-				'event_label': 'Uploader - Form Submitted'
-			});
+			var eventArray = new Array();
+			eventArray['type'] 		= 'event';
+			eventArray['category'] 	= 'Upload Form';
+			eventArray['action'] 	= 'Submited';
+			eventArray['label'] 	= 'Upload Form - Submited';
+			triggerGA_event(eventArray);
+			
+			
+			
+			
 		});	
 		
 		
@@ -212,11 +221,13 @@ jQuery( document ).ready(function() {
 	jQuery(document).mousedown(function(e){ 
 		if( e.button == 2 && jQuery(e.target).is(".asset-page .asset-thumbnail.full-width img")) { 
 			// alert('Right mouse button!'); 
-			console.log('Right click over image');
-			gtag('event', 'image_rightclicked', {
-				'event_category'	: 'Image Detail',
-				'event_label'		: 'Image Detail - Right Click'
-			});
+			var eventArray = new Array();
+			eventArray['type'] 		= 'event';
+			eventArray['category'] 	= 'Image Detail';
+			eventArray['action'] 	= 'Right click over image';
+			eventArray['label'] 	= 'Image Detail - Right click over image';
+			triggerGA_event(eventArray);
+			
 		} 
 	});	
 	
@@ -228,11 +239,12 @@ jQuery( document ).ready(function() {
 		if(itemViewed == false && jQuery(selector).length >0) {
 			if(inView(selector)){
 				itemViewed = true;
-				console.log("Credits Viewed");
-				gtag('event', 'credits_viewed', {
-					'event_category'	: 'Credits',
-					'event_label'		: 'Credits - Viewed'
-				});
+				var eventArray = new Array();
+				eventArray['type'] 		= 'event';
+				eventArray['category'] 	= 'Image Detail';
+				eventArray['action'] 	= 'Credits Viewed';
+				eventArray['label'] 	= 'Image Detail - Credits Viewed';
+				triggerGA_event(eventArray);
 			}
 		}
 		
@@ -254,9 +266,13 @@ function inView(selector) {
 	}
 }
 jQuery('body').on('DOMNodeInserted', '#searchResultsContainer', function(e) {
-	console.log("Show More Pagination Inserted");
-	gtag('event', 'showmore_pagination_added', {
-		'event_category'	: 'Show More',
-		'event_label'		: 'Show More - Pagination Added'
-	});
+	
+	var eventArray = new Array();
+	eventArray['type'] 		= 'event';
+	eventArray['category'] 	= 'Show More';
+	eventArray['action'] 	= 'Pagination Added';
+	eventArray['label'] 	= 'Show More - Pagination Added';
+	triggerGA_event(eventArray);
+	
+	
 });
