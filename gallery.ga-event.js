@@ -38,11 +38,13 @@ jQuery( document ).ready(function() {
 	var dir = loc.substring(0, loc.lastIndexOf('/'));
 	if(dir == '/uploader'){
 		// Uploader Context
+		/*
 		console.log("Uploader Page Visited");	
 		gtag('event', 'page_visited', {
 			'event_category': 'Page',
 			'event_label': 'Page - Uploader Page Visited'
 		});
+		*/
 		
 		jQuery('#upload-form #submit-button').click(function() {
 			console.log("Submit Button Clicked");
