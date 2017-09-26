@@ -167,7 +167,7 @@ jQuery( document ).ready(function() {
 				
 		});
 		
-		
+		/*
 		jQuery(".upload_message").change(function() {
 			if(jQuery(this).html().search( 'has been successfully uploaded.')) {
 				
@@ -185,6 +185,7 @@ jQuery( document ).ready(function() {
 				'event_label': 'Uploader Form - File - '+"File Uploaded Successfully"
 			});
 		}
+		*/
 		// 
 		
 		/*
