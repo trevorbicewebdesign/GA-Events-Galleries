@@ -7,28 +7,31 @@
 // console.log("Uploader Page Visited");	
 // console.log("Submit Button Clicked");
 
-function triggerGA_event(eventArray) {
-	console.log(eventArray['label']);
-	ga('send', {
-		hitType: 			eventArray['type'],
-		eventCategory: 	eventArray['category'],
-		eventAction: 		eventArray['action'],
-		eventLabel:		eventArray['label']
-	});
-}
+
 jQuery( document ).ready(function() {
-	
+	function triggerGA_event(eventArray) {
+		console.log(eventArray['label']);
+		ga('send', {
+			hitType: 			eventArray['type'],
+			eventCategory: 	eventArray['category'],
+			eventAction: 		eventArray['action'],
+			eventLabel:		eventArray['label']
+		});
+	}
 	
 	jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
 		//if ( settings.url == "ajax/test.html" ) {
 			
 		results = jQuery.parseJSON(xhr.responseText);
+	
 		if(results.uploadMessage) {
-			ga('send', {
-				hitType: 		'pageview',
-				page: 		location.pathname + "upload-success/",
-				title:		"File Uploaded Successfully"
-			});
+			if(results.uploadMessage.includes( 'has been successfully uploaded.')) {
+				ga('send', {
+					hitType: 		'pageview',
+					page: 		location.pathname + "upload-success/",
+					title:		"File Uploaded Successfully"
+				});
+			}
 		}
 		
 	});
@@ -247,6 +250,11 @@ jQuery('body').on('DOMNodeInserted', '#searchResultsContainer', function(e) {
 	eventArray['action'] 	= 'Pagination Added';
 	eventArray['label'] 	= 'Show More - Pagination Added';
 	triggerGA_event(eventArray);
+	
+	ga('send', {
+		hitType: 		'pageview',
+		page: 		location.pathname
+	});
 	
 	
 });
