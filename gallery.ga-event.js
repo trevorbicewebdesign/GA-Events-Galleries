@@ -11,12 +11,14 @@
 jQuery( document ).ready(function() {
 	function triggerGA_event(eventArray) {
 		console.log(eventArray['label']);
-		ga('send', {
-			hitType: 			eventArray['type'],
-			eventCategory: 	eventArray['category'],
-			eventAction: 		eventArray['action'],
-			eventLabel:		eventArray['label']
-		});
+		if(typeof ga !== 'undefined'){
+			ga('send', {
+				hitType: 			eventArray['type'],
+				eventCategory: 	eventArray['category'],
+				eventAction: 		eventArray['action'],
+				eventLabel:		eventArray['label']
+			});
+		}
 	}
 	
 	jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
