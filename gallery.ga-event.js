@@ -18,6 +18,21 @@ function triggerGA_event(eventArray) {
 }
 jQuery( document ).ready(function() {
 	
+	
+	jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
+		//if ( settings.url == "ajax/test.html" ) {
+			
+		results = jQuery.parseJSON(xhr.responseText);
+		if(results.uploadMessage) {
+			ga('send', {
+				hitType: 		'pageview',
+				page: 		location.pathname + "upload-success/",
+				title:		"File Uploaded Successfully"
+			});
+		}
+		
+	});
+	
 	// Event if the 'Show More' Button has been clicked
 	jQuery('.show-more > a').click(function(){
 		console.log('Show More button activated');
@@ -159,47 +174,6 @@ jQuery( document ).ready(function() {
 				
 		});
 		
-		
-		jQuery(".upload_message").change(function() {
-			if(jQuery(this).html().includes( 'has been successfully uploaded.')) {
-				
-				var eventArray = new Array();
-				eventArray['type'] 		= 'event';
-				eventArray['category'] 	= 'Upload Form';
-				eventArray['action'] 	= 'Upload Successful';
-				eventArray['label'] 	= 'Upload Form - Upload Successful';
-				triggerGA_event(eventArray);
-				
-				ga('send', {
-					hitType: 'pageview',
-					page: location.pathname + "/upload-success/"
-				});
-
-			}
-		});
-		if(jQuery(".upload_message").html().includes( 'has been successfully uploaded.')) {
-			var eventArray = new Array();
-			eventArray['type'] 		= 'event';
-			eventArray['category'] 	= 'Upload Form';
-			eventArray['action'] 	= 'Upload Successful';
-			eventArray['label'] 	= 'Upload Form - Upload Successful';
-			triggerGA_event(eventArray);
-			
-			ga('send', {
-				hitType: 		'pageview',
-				page: 		location.pathname + "/upload-success/",
-				title:		"File Uploaded Successfully"
-			});
-		}
-		
-		// 
-		
-		/*
-		jQuery('mydiv').bind("DOMSubtreeModified",function(){
-			alert('changed');
-		});
-		*/
-
 		jQuery('#upload-form').submit(function() {
 			
 			var eventArray = new Array();
