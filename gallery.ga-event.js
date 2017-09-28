@@ -13,13 +13,14 @@ jQuery( document ).ready(function() {
 		console.log(eventArray['label']);
 		if(typeof ga !== 'undefined'){
 			ga('send', {
-				hitType: 			eventArray['type'],
+				hitType: 			'event',
 				eventCategory: 	eventArray['category'],
 				eventAction: 		eventArray['action'],
 				eventLabel:		eventArray['label']
 			});
 		}
 	}
+	
 	
 	jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
 		//if ( settings.url == "ajax/test.html" ) {
@@ -28,6 +29,12 @@ jQuery( document ).ready(function() {
 		
 		if(results.uploadMessage) {
 			if(results.uploadMessage.includes( 'has been successfully uploaded.')) {
+				var eventArray = new Array();
+				eventArray['category'] 	= 'Upload Form';
+				eventArray['action'] 	= 'File Successfuly Uploaded';
+				eventArray['label'] 	= 'Upload Form - File Successfuly Uploaded';
+				triggerGA_event(eventArray);	
+				
 				ga('send', {
 					hitType: 		'pageview',
 					page: 		location.pathname + "upload-form-success/",
@@ -44,7 +51,6 @@ jQuery( document ).ready(function() {
 				
 				var aria_expanded = jQuery(this).attr('aria-expanded');
 				var eventArray = new Array();
-				eventArray['type'] 		= 'event';
 				eventArray['category'] 	= 'Accordion';
 				
 				if(aria_expanded == 'false' || aria_expanded== null){
@@ -124,6 +130,14 @@ jQuery( document ).ready(function() {
 	if(dir == '/uploader'){
 		// Uploader Context
 		
+		if( jQuery('.container-text.login').length > 0) {
+			ga('send', {
+				hitType: 		'pageview',
+				page: 		location.pathname + "upload-login/",
+				title:		"Uploader Form - Please Login to Continue"
+			});
+			
+		}
 		
 		jQuery('#upload-form #submit-button').click(function() {
 			
