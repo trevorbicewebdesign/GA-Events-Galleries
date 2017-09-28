@@ -25,7 +25,7 @@ jQuery( document ).ready(function() {
 		//if ( settings.url == "ajax/test.html" ) {
 			
 		results = jQuery.parseJSON(xhr.responseText);
-	
+		
 		if(results.uploadMessage) {
 			if(results.uploadMessage.includes( 'has been successfully uploaded.')) {
 				ga('send', {
@@ -38,6 +38,30 @@ jQuery( document ).ready(function() {
 		
 	});
 	
+	jQuery(window).load(function(){
+		jQuery('h3.ui-accordion-header').each(function(index,element){
+			jQuery(this).click(function(){
+				
+				var aria_expanded = jQuery(this).attr('aria-expanded');
+				var eventArray = new Array();
+				eventArray['type'] 		= 'event';
+				eventArray['category'] 	= 'Accordion';
+				
+				if(aria_expanded == 'false' || aria_expanded== null){
+					
+					eventArray['action'] 	= 'Opened';
+					eventArray['label'] 	= 'Accordion - Closed - ' + jQuery(this).text();
+					triggerGA_event(eventArray);
+				}
+				else {
+					eventArray['action'] 	= 'Opened';
+					eventArray['label'] 	= 'Accordion - Opened - ' + jQuery(this).text();
+					triggerGA_event(eventArray);						
+				}
+			});
+			
+		});
+	});
 	// Event if the 'Show More' Button has been clicked
 	jQuery('.show-more > a').click(function(){
 		console.log('Show More button activated');
@@ -45,7 +69,7 @@ jQuery( document ).ready(function() {
 	
 	// Event if the Menu has been opened or closed
 	jQuery('.navbar-toggle').click(function() {
-		var aria_expanded = $(this).attr('aria-expanded');
+		var aria_expanded = jQuery(this).attr('aria-expanded');
 		
 		var eventArray = new Array();
 		eventArray['type'] 		= 'event';
@@ -66,6 +90,36 @@ jQuery( document ).ready(function() {
 		}
 	});
 	
+	jQuery('#contact-form').submit(function() {
+		
+	});
+	
+	jQuery('#contact-form').on('afterValidate', function () {
+		jQuery('#contact-form .form-group.required, #contact-form .form-group.has-error').each(function(index,element){
+			var eventArray = new Array();
+			eventArray['category'] 	= 'Contact Form';
+			eventArray['action'] 	= 'Error';
+			
+			if( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') {
+				error = jQuery(this).find('.help-block-error').text();
+				
+				eventArray['label'] 	= 'Contact Form - Error - ' + error;
+				triggerGA_event(eventArray);
+			}
+		});
+	});
+		
+	
+	jQuery('#contact-form button[type=submit]').click(function() {
+		var eventArray = new Array();
+		eventArray['category'] 	= 'Contact Form';
+		eventArray['action'] 	= 'Submit Button Clicked';
+		eventArray['label'] 	= 'Contact Form - Submit Button Clicked';
+		triggerGA_event(eventArray);
+		
+		
+	});
+	
 	// Uploader Specific events
 	var loc = window.location.pathname;
 	var dir = loc.substring(0, loc.lastIndexOf('/'));
@@ -76,17 +130,16 @@ jQuery( document ).ready(function() {
 		jQuery('#upload-form #submit-button').click(function() {
 			
 			var eventArray = new Array();
-			eventArray['type'] 		= 'event';
 			eventArray['category'] 	= 'Upload Form';
 			eventArray['action'] 	= 'Submit Button Clicked';
 			eventArray['label'] 	= 'Upload Form - Submit Button Clicked';
-			
 			triggerGA_event(eventArray);
 			
 			jQuery('#upload-form .form-group.required, #upload-form .form-group.has-error').each(function(index,element){
 					// This must be the file upload field
 					
 					eventArray['action'] 	= 'Error';
+
 
 					if( jQuery(this).hasClass('field-uploaderform-imagefile') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = jQuery(this).find('.help-block-error').text();
