@@ -30,7 +30,7 @@ jQuery( document ).ready(function() {
 			if(results.uploadMessage.includes( 'has been successfully uploaded.')) {
 				ga('send', {
 					hitType: 		'pageview',
-					page: 		location.pathname + "upload-success/",
+					page: 		location.pathname + "upload-form-success/",
 					title:		"File Uploaded Successfully"
 				});
 			}
@@ -90,10 +90,8 @@ jQuery( document ).ready(function() {
 		}
 	});
 	
-	jQuery('#contact-form').submit(function() {
-		
-	});
 	
+		
 	jQuery('#contact-form').on('afterValidate', function () {
 		jQuery('#contact-form .form-group.required, #contact-form .form-group.has-error').each(function(index,element){
 			var eventArray = new Array();
@@ -247,6 +245,22 @@ jQuery( document ).ready(function() {
 		});	
 		
 		
+	}
+	else if(loc == '/contact'){
+		if( jQuery('.alert.alert-success').text().includes('Thank you. Your message has been sent.') ) {
+			
+			var eventArray = new Array();
+			eventArray['category'] 	= 'Contact Form';
+			eventArray['action'] 	= 'Form Submitted Successfully';
+			eventArray['label'] 	= 'Contact Form - Form Submitted Successfully';
+			triggerGA_event(eventArray);
+			
+			ga('send', {
+				hitType: 		'pageview',
+				page: 		location.pathname + "/contact-form-success/",
+				title:		"Contact Form Submitted Successfully"
+			});
+		}
 	}
 	
 	// User has right clicked while over an image
