@@ -264,17 +264,11 @@ jQuery( document ).ready(function() {
 		});
 		
 		jQuery('#upload-form').submit(function() {
-			
 			var eventArray = new Array();
-			eventArray['type'] 		= 'event';
 			eventArray['category'] 	= 'Upload Form';
 			eventArray['action'] 	= 'Submited';
 			eventArray['label'] 	= 'Upload Form - Submited';
 			triggerGA_event(eventArray);
-			
-			
-			
-			
 		});	
 		
 		
@@ -301,7 +295,6 @@ jQuery( document ).ready(function() {
 		if( e.button == 2 && jQuery(e.target).is(".asset-page .asset-thumbnail.full-width img")) { 
 			// alert('Right mouse button!'); 
 			var eventArray = new Array();
-			eventArray['type'] 		= 'event';
 			eventArray['category'] 	= 'Image Detail';
 			eventArray['action'] 	= 'Right click over image';
 			eventArray['label'] 	= 'Image Detail - Right click over image';
@@ -319,7 +312,6 @@ jQuery( document ).ready(function() {
 			if(inView(selector)){
 				itemViewed = true;
 				var eventArray = new Array();
-				eventArray['type'] 		= 'event';
 				eventArray['category'] 	= 'Image Detail';
 				eventArray['action'] 	= 'Credits Viewed';
 				eventArray['label'] 	= 'Image Detail - Credits Viewed';
