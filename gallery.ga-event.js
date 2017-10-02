@@ -28,21 +28,18 @@
 // Viewed Credits
 // END IMAGE DETAIL ITEMS
 
-
-jQuery( document ).ready(function() {
-	function triggerGA_event(eventArray) {
-		console.log(eventArray['label']);
-		if(typeof ga !== 'undefined'){
-			ga('send', {
-				hitType: 			'event',
-				eventCategory: 	eventArray['category'],
-				eventAction: 		eventArray['action'],
-				eventLabel:		eventArray['label']
-			});
-		}
+function triggerGA_event(eventArray) {
+	console.log(eventArray['label']);
+	if(typeof ga !== 'undefined'){
+		ga('send', {
+			hitType: 			'event',
+			eventCategory: 	eventArray['category'],
+			eventAction: 		eventArray['action'],
+			eventLabel:		eventArray['label']
+		});
 	}
-	
-	
+}
+jQuery( document ).ready(function() {
 	jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
 		results = jQuery.parseJSON(xhr.responseText);
 		
