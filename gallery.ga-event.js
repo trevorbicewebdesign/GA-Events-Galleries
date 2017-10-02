@@ -1,11 +1,32 @@
 // JavaScript Document
 
 // Events Generated Are summarized below
-// console.log('Show More button activated');
-// console.log('Menu Activated');
-// console.log('Menu Deactivated')
-// console.log("Uploader Page Visited");	
-// console.log("Submit Button Clicked");
+// UPLOAD FORM
+// Virtual Form Login PageView event /uploader/profiles-login/
+// File Successfuly Uploaded
+// Virtual PageView event for Successful Upload /uploader/upload-form-success/
+// Submit Button Clicked
+// Form Submitted
+// Form Errors Produced on Submit button clicked
+// END UPLOAD FORM
+// Show More Clicked
+// Show More Pagination Added
+// VirtualPageview for Pagination views
+// CONTACT FORM
+// Submit Button Clicked
+// Form Submitted
+// Form Errors Produced on Submit button click
+// Form Successfully Submitted
+// VirtualPageview for form successful submissions /contact/contact-form-success/
+// END CONTACT FORM
+// Menu Open
+// Menu Close
+// Accordion Open
+// Accordion Close
+// IMAGE DETAIL ITEMS
+// Right Clicked Image
+// Viewed Credits
+// END IMAGE DETAIL ITEMS
 
 
 jQuery( document ).ready(function() {
@@ -23,8 +44,6 @@ jQuery( document ).ready(function() {
 	
 	
 	jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
-		//if ( settings.url == "ajax/test.html" ) {
-			
 		results = jQuery.parseJSON(xhr.responseText);
 		
 		if(results.uploadMessage) {
@@ -328,7 +347,6 @@ function inView(selector) {
 jQuery('body').on('DOMNodeInserted', '#searchResultsContainer', function(e) {
 	
 	var eventArray = new Array();
-	eventArray['type'] 		= 'event';
 	eventArray['category'] 	= 'Show More';
 	eventArray['action'] 	= 'Pagination Added';
 	eventArray['label'] 	= 'Show More - Pagination Added';
