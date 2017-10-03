@@ -92,7 +92,7 @@ jQuery( document ).ready(function() {
 	jQuery('.show-more > a').click(function(){
 		var eventArray = new Array();
 		eventArray['action'] 	= 'Opened';
-		eventArray['label'] 	= 'Menu - Opened';ent';
+		eventArray['label'] 	= 'Menu - Opened';
 		eventArray['category'] 	= 'Menu';
 	});
 	
