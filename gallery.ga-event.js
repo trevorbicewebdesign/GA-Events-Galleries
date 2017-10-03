@@ -107,9 +107,9 @@ jQuery( document ).ready(function() {
 		
 		if(aria_expanded == 'false' || aria_expanded== null){
 			var eventArray = new Array();
-			eventArray['category'] 	= 'Show More';
-			eventArray['action'] 	= 'Activated';
-			eventArray['label'] 	= 'Show More - Activated';
+			
+			eventArray['action'] 	= 'Closed';
+			eventArray['label'] 	= 'Menu - Closed';
 			triggerGA_event(eventArray);
 			
 		}
