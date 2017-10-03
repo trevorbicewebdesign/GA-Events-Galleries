@@ -25,6 +25,7 @@
 // Accordion Close
 // IMAGE DETAIL ITEMS
 // Right Clicked Image
+// Viewed Image
 // Viewed Credits
 // END IMAGE DETAIL ITEMS
 function triggerGA_event(eventArray) {
