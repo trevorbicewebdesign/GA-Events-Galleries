@@ -91,9 +91,9 @@ jQuery( document ).ready(function() {
 	// Event if the 'Show More' Button has been clicked
 	jQuery('.show-more > a').click(function(){
 		var eventArray = new Array();
-		eventArray['action'] 	= 'Opened';
-		eventArray['label'] 	= 'Menu - Opened';
-		eventArray['category'] 	= 'Menu';
+		eventArray['category'] 	= 'Show More';
+		eventArray['action'] 	= 'Activated';
+		eventArray['label'] 	= 'Show More - Activated';
 		triggerGA_event(eventArray);	
 	});
 	
