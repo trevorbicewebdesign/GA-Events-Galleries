@@ -27,7 +27,6 @@
 // Right Clicked Image
 // Viewed Credits
 // END IMAGE DETAIL ITEMS
-
 function triggerGA_event(eventArray) {
 	console.log(eventArray['label']);
 	if(typeof ga !== 'undefined'){
@@ -39,7 +38,11 @@ function triggerGA_event(eventArray) {
 		});
 	}
 }
+
 jQuery( document ).ready(function() {
+	
+	
+	
 	jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
 		results = jQuery.parseJSON(xhr.responseText);
 		
@@ -318,8 +321,18 @@ jQuery( document ).ready(function() {
 		
 			
 	});	
-	
+	if( jQuery('.main-container .asset-page').length > 0 ){
+
+            var eventArray = new Array();
+		eventArray['category'] 	= 'Image Detail';
+		eventArray['action'] 	= 'Viewed';
+		eventArray['label'] 	= 'Image Detail - Viewed';
+		triggerGA_event(eventArray);
+        
+    }
 });
+
+    
 function inView(selector) {
 	var top_of_element 		= jQuery(selector).offset().top;
 	var bottom_of_element 	= jQuery(selector).offset().top + jQuery(selector).outerHeight();
