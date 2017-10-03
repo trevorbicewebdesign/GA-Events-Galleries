@@ -94,6 +94,7 @@ jQuery( document ).ready(function() {
 		eventArray['action'] 	= 'Opened';
 		eventArray['label'] 	= 'Menu - Opened';
 		eventArray['category'] 	= 'Menu';
+		triggerGA_event(eventArray);	
 	});
 	
 	// Event if the Menu has been opened or closed
