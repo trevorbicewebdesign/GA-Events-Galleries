@@ -75,7 +75,7 @@ jQuery( document ).ready(function() {
 				
 				if(aria_expanded == 'false' || aria_expanded== null){
 					
-					eventArray['action'] 	= 'Opened';
+					eventArray['action'] 	= 'Closed';
 					eventArray['label'] 	= 'Accordion - Closed - ' + jQuery(this).text();
 					triggerGA_event(eventArray);
 				}
