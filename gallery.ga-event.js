@@ -29,7 +29,7 @@
 // Viewed Credits
 // END IMAGE DETAIL ITEMS
 function triggerGA_event(eventArray) {
-	console.log(eventArray['label']);
+	// console.log(eventArray['label']);
 	if(typeof ga !== 'undefined'){
 		ga('send', {
 			hitType: 			'event',
@@ -90,7 +90,10 @@ jQuery( document ).ready(function() {
 	});
 	// Event if the 'Show More' Button has been clicked
 	jQuery('.show-more > a').click(function(){
-		console.log('Show More button activated');
+		var eventArray = new Array();
+		eventArray['action'] 	= 'Opened';
+		eventArray['label'] 	= 'Menu - Opened';ent';
+		eventArray['category'] 	= 'Menu';
 	});
 	
 	// Event if the Menu has been opened or closed
@@ -98,14 +101,14 @@ jQuery( document ).ready(function() {
 		var aria_expanded = jQuery(this).attr('aria-expanded');
 		
 		var eventArray = new Array();
-		eventArray['type'] 		= 'event';
 		eventArray['category'] 	= 'Menu';
 		
 		
 		if(aria_expanded == 'false' || aria_expanded== null){
-			console.log('Menu Activated');
-			eventArray['action'] 	= 'Opened';
-			eventArray['label'] 	= 'Menu - Opened';
+			var eventArray = new Array();
+			eventArray['category'] 	= 'Show More';
+			eventArray['action'] 	= 'Activated';
+			eventArray['label'] 	= 'Show More - Activated';
 			triggerGA_event(eventArray);
 			
 		}
