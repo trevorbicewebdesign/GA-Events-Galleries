@@ -54,12 +54,6 @@ jQuery( document ).ready(function() {
 				eventArray['action'] 	= 'File Successfuly Uploaded';
 				eventArray['label'] 	= 'Upload Form - File Successfuly Uploaded';
 				triggerGA_event(eventArray);	
-				
-				ga('send', {
-					hitType: 		'pageview',
-					page: 		location.pathname + "upload-form-success/",
-					title:		"File Uploaded Successfully"
-				});
 			}
 		}
 		
@@ -248,12 +242,6 @@ jQuery( document ).ready(function() {
 			eventArray['action'] 	= 'Form Submitted Successfully';
 			eventArray['label'] 	= 'Contact Form - Form Submitted Successfully';
 			triggerGA_event(eventArray);
-			
-			ga('send', {
-				hitType: 		'pageview',
-				page: 		location.pathname + "/contact-form-success/",
-				title:		"Contact Form Submitted Successfully"
-			});
 		}
 	}
 	
