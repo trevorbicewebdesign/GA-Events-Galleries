@@ -185,11 +185,7 @@ jQuery( document ).ready(function() {
 					// This must be the First Name
 					else if( jQuery(this).hasClass('field-uploaderform-fname') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a first name";
-						if(jQuery(this).find('input').val() == ''){
-							jQuery(this).addClass('has-error');
-							jQuery(this).find('.help-block-error').html("Required field.");
 						
-						}
 						eventArray['label'] 	= 'Upload Form - Error - ' + error;
 						triggerGA_event(eventArray);
 						
@@ -197,11 +193,7 @@ jQuery( document ).ready(function() {
 				 // Last Name
 					else if( jQuery(this).hasClass('field-uploaderform-lname') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a last name";
-						if(jQuery(this).find('input').val() == ''){
-							jQuery(this).addClass('has-error');
-							jQuery(this).find('.help-block-error').html("Required field.");
 						
-						}
 						eventArray['label'] 	= 'Upload Form - Error - ' + error;
 						triggerGA_event(eventArray);
 					}
@@ -209,11 +201,6 @@ jQuery( document ).ready(function() {
 					else if( jQuery(this).hasClass('field-uploaderform-photographersemail') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter an email";
 						
-						if(jQuery(this).find('input').val() == ''){
-							jQuery(this).addClass('has-error');
-							jQuery(this).find('.help-block-error').html("Required field.");
-						
-						}
 						eventArray['label'] 	= 'Upload Form - Error - ' + error;
 						triggerGA_event(eventArray);
 					}
@@ -221,11 +208,7 @@ jQuery( document ).ready(function() {
 					else if( jQuery(this).hasClass('field-uploaderform-title') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a photo title";
 						
-						if(jQuery(this).find('input').val() == ''){
-							jQuery(this).addClass('has-error');
-							jQuery(this).find('.help-block-error').html("Required field.");
 						
-						}
 						eventArray['label'] 	= 'Upload Form - Error - ' + error;
 						triggerGA_event(eventArray);
 					}
@@ -233,11 +216,7 @@ jQuery( document ).ready(function() {
 					else if( jQuery(this).hasClass('field-uploaderform-captionfrommeta') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('input').val() == '') ){
 						error = "Please enter a caption";  
 					
-						if(jQuery(this).find('input').val() == ''){
-							jQuery(this).addClass('has-error');
-							jQuery(this).find('.help-block-error').html("Required field.");
 						
-						}
 						eventArray['label'] 	= 'Upload Form - Error - ' + error;
 						triggerGA_event(eventArray);
 					}
@@ -245,10 +224,6 @@ jQuery( document ).ready(function() {
 					else if( jQuery(this).hasClass('field-uploaderform-year') && ( jQuery(this).hasClass('has-error') || jQuery(this).find('select').val() == '') ){
 						error = "Please enter a year";
 						
-						if(jQuery(this).find('select').val() == ''){
-							jQuery(this).addClass('has-error');
-							jQuery(this).find('.help-block-error').html("Required field.");
-						}
 						eventArray['label'] 	= 'Upload Form - Error - ' + error;
 						triggerGA_event(eventArray);
 					}
@@ -256,10 +231,6 @@ jQuery( document ).ready(function() {
 					else if( jQuery(this).hasClass('field-uploaderform-acceptcheckbox') && ( jQuery(this).hasClass('has-error') || !jQuery(this).find('input').attr("checked") ) ){
 						error = "Please check the terms of service";
 						
-						if(!jQuery(this).find('input').attr("checked")){
-							jQuery(this).addClass('has-error');
-							jQuery(this).find('.help-block-error').html("Required field.");
-						}
 						eventArray['label'] 	= 'Upload Form - Error - ' + error;
 						triggerGA_event(eventArray);
 					}
