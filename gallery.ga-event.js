@@ -163,6 +163,16 @@ jQuery( document ).ready(function() {
 			
 		}
 		
+		if( jQuery('.upload_success').length > 0) {
+			jQuery('.upload_success').text().includes('has been successfully uploaded.') 
+			ga('send', {
+				hitType: 		'pageview',
+				page: 		location.pathname + "upload-form-success/",
+				title:		"Uploader Form - File Submitted Successfully"
+			});
+			
+		}
+		
 		jQuery('#upload-form #submit-button').click(function() {
 			
 			var eventArray = new Array();
