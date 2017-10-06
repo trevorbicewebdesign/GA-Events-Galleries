@@ -163,8 +163,8 @@ jQuery( document ).ready(function() {
 			
 		}
 		
-		if( jQuery('.upload_success').length > 0) {
-			jQuery('.upload_success').text().includes('has been successfully uploaded.') 
+		if( jQuery('.uploader-success').length > 0) {
+			jQuery('.uploader-success').text().includes('has been successfully uploaded.') 
 			ga('send', {
 				hitType: 		'pageview',
 				page: 		location.pathname + "upload-form-success/",
