@@ -164,12 +164,17 @@ jQuery( document ).ready(function() {
 		}
 		
 		if( jQuery('.uploader-success').length > 0) {
-			jQuery('.uploader-success').text().includes('has been successfully uploaded.') 
-			ga('send', {
-				hitType: 		'pageview',
-				page: 		location.pathname + "upload-form-success/",
-				title:		"Uploader Form - File Submitted Successfully"
-			});
+			if(jQuery('.uploader-success').text().includes('has been successfully uploaded.')){
+				var eventArray = new Array();
+				eventArray['category'] 	= 'Upload Form';
+				eventArray['action'] 	= 'File Successfully Uploaded';
+				eventArray['label'] 	= 'Upload Form - File Successfully Uploaded';
+				ga('send', {
+					hitType: 		'pageview',
+					page: 		location.pathname + "upload-form-success/",
+					title:		"Uploader Form - File Successfully Uploaded"
+				});
+			}
 			
 		}
 		
