@@ -138,7 +138,7 @@ jQuery( document ).ready(function() {
 	// Uploader Specific events
 	var loc = window.location.pathname;
 	var dir = loc.substring(0, loc.lastIndexOf('/'));
-	if(dir == '/uploader'){
+	if(dir == '/uploader' || loc=='/uploader/'){
 		// Uploader Context
 		if( jQuery('.container-text.login').length > 0) {
 			ga('send', {
