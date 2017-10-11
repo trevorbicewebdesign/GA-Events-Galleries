@@ -153,11 +153,7 @@ jQuery( document ).ready(function() {
 				eventArray['category'] 	= 'Upload Form';
 				eventArray['action'] 	= 'File Successfully Uploaded';
 				eventArray['label'] 	= 'Upload Form - File Successfully Uploaded';
-				ga('send', {
-					hitType: 		'pageview',
-					page: 		location.pathname + "upload-form-success/",
-					title:		"Uploader Form - File Successfully Uploaded"
-				});
+				triggerGA_event(eventArray);
 			}
 		}
 		jQuery('#upload-form #submit-button').click(function() {
