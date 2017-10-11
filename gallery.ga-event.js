@@ -41,12 +41,8 @@ function triggerGA_event(eventArray) {
 }
 
 jQuery( document ).ready(function() {
-	
-	
-	
 	jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
 		results = jQuery.parseJSON(xhr.responseText);
-		
 		if(results.uploadMessage) {
 			if(results.uploadMessage.includes( 'has been successfully uploaded.')) {
 				var eventArray = new Array();
@@ -115,8 +111,6 @@ jQuery( document ).ready(function() {
 			triggerGA_event(eventArray);
 		}
 	});
-	
-	
 		
 	jQuery('#contact-form').on('afterValidate', function () {
 		jQuery('#contact-form .form-group.required, #contact-form .form-group.has-error').each(function(index,element){
@@ -131,8 +125,7 @@ jQuery( document ).ready(function() {
 				triggerGA_event(eventArray);
 			}
 		});
-	});
-		
+	});	
 	
 	jQuery('#contact-form button[type=submit]').click(function() {
 		var eventArray = new Array();
@@ -140,8 +133,6 @@ jQuery( document ).ready(function() {
 		eventArray['action'] 	= 'Submit Button Clicked';
 		eventArray['label'] 	= 'Contact Form - Submit Button Clicked';
 		triggerGA_event(eventArray);
-		
-		
 	});
 	
 	// Uploader Specific events
@@ -149,16 +140,13 @@ jQuery( document ).ready(function() {
 	var dir = loc.substring(0, loc.lastIndexOf('/'));
 	if(dir == '/uploader'){
 		// Uploader Context
-		
 		if( jQuery('.container-text.login').length > 0) {
 			ga('send', {
 				hitType: 		'pageview',
 				page: 		location.pathname + "upload-login/",
 				title:		"Uploader Form - Please Login to Continue"
 			});
-			
 		}
-		
 		if( jQuery('.uploader-success').length > 0) {
 			if(jQuery('.uploader-success').text().includes('has been successfully uploaded.')){
 				var eventArray = new Array();
@@ -171,9 +159,7 @@ jQuery( document ).ready(function() {
 					title:		"Uploader Form - File Successfully Uploaded"
 				});
 			}
-			
 		}
-		
 		jQuery('#upload-form #submit-button').click(function() {
 			
 			var eventArray = new Array();
@@ -184,18 +170,14 @@ jQuery( document ).ready(function() {
 			
 			jQuery('#upload-form .form-group.has-error').each(function(index,element){
 				// This must be the file upload field
-
 				eventArray['action'] 	= 'Error';
-
 
 				if( jQuery(this).hasClass('has-error') ){
 					error = jQuery(this).find('.help-block-error').text();
 					eventArray['label'] 	= 'Upload Form - Error - ' + error;
 					triggerGA_event(eventArray);
 				}
-
-			});
-				
+			});	
 		});
 		
 		jQuery('#upload-form').submit(function() {
@@ -205,8 +187,6 @@ jQuery( document ).ready(function() {
 			eventArray['label'] 	= 'Upload Form - Submited';
 			triggerGA_event(eventArray);
 		});	
-		
-		
 	}
 	else if(loc == '/contact'){
 		if( jQuery('.alert.alert-success').text().includes('Thank you. Your message has been sent.') ) {
@@ -234,15 +214,11 @@ jQuery( document ).ready(function() {
 			eventArray['action'] 	= 'Right click over image';
 			eventArray['label'] 	= 'Image Detail - Right click over image';
 			triggerGA_event(eventArray);
-			
 		} 
 	});	
-	
 	var itemViewed = false;
 	jQuery(window).scroll(function() {
-		
 		var selector = ".asset-details .flex-item:first-child";
-		
 		if(itemViewed == false && jQuery(selector).length >0) {
 			if(inView(selector)){
 				itemViewed = true;
@@ -252,9 +228,7 @@ jQuery( document ).ready(function() {
 				eventArray['label'] 	= 'Image Detail - Credits Viewed';
 				triggerGA_event(eventArray);
 			}
-		}
-		
-			
+		}	
 	});	
 	if( jQuery('.main-container .asset-page').length > 0 ){
 
@@ -266,7 +240,6 @@ jQuery( document ).ready(function() {
         
     }
 });
-
     
 function inView(selector) {
 	var top_of_element 		= jQuery(selector).offset().top;
