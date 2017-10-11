@@ -104,14 +104,10 @@ jQuery( document ).ready(function() {
 		var eventArray = new Array();
 		eventArray['category'] 	= 'Menu';
 		
-		
-		if(aria_expanded == 'false' || aria_expanded== null){
-			var eventArray = new Array();
-			
+		if(aria_expanded == 'false' || aria_expanded== null){			
 			eventArray['action'] 	= 'Closed';
 			eventArray['label'] 	= 'Menu - Closed';
 			triggerGA_event(eventArray);
-			
 		}
 		else {
 			eventArray['action'] 	= 'Opened';
