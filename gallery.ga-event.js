@@ -41,26 +41,6 @@ function triggerGA_event(eventArray) {
 }
 
 jQuery( document ).ready(function() {
-	jQuery( document ).ajaxSuccess(function( event, xhr, settings ) {
-		results = jQuery.parseJSON(xhr.responseText);
-		if(results.uploadMessage) {
-			if(results.uploadMessage.includes( 'has been successfully uploaded.')) {
-				var eventArray = new Array();
-				eventArray['category'] 	= 'Upload Form';
-				eventArray['action'] 	= 'File Successfuly Uploaded';
-				eventArray['label'] 	= 'Upload Form - File Successfuly Uploaded';
-				triggerGA_event(eventArray);	
-				
-				ga('send', {
-					hitType: 		'pageview',
-					page: 		location.pathname + "upload-form-success/",
-					title:		"File Uploaded Successfully"
-				});
-			}
-		}
-		
-	});
-	
 	jQuery(window).load(function(){
 		jQuery('h3.ui-accordion-header').each(function(index,element){
 			jQuery(this).click(function(){
